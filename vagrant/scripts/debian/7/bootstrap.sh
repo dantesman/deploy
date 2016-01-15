@@ -9,6 +9,7 @@ UPDATE="apt-get update"
 
 echo "deb http://http.debian.net/debian ${RELEASE} main contrib non-free" > /etc/apt/sources.list
 echo "deb http://http.debian.net/debian ${RELEASE}-backports main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://security.debian.org/ wheezy/updates main contrib non-free" >> /etc/apt/sources.list
 
 eval $UPDATE
 

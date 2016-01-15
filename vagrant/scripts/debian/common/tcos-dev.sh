@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 INSTALL="-y --force-yes --no-install-recommends"
-PACKAGES="tcos-dev git realpath aufs-tools debootstrap zsh mr vcsh gnupg-agent"
+PACKAGES="tcos-dev git realpath aufs-tools debootstrap zsh mr vcsh gnupg-agent tig cython python-dev"
 GITHUB_GIT="git@github.com:openthinclient/"
 GITHUB_HTTP="https://github.com/openthinclient/"
 
