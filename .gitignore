@@ -11,4 +11,4 @@ data/*
 !data/.noempty
 vagrant_basebox/builds/
 vagrant/packer_cache/
-deploy/vagrant/.vagrant/
+vagrant/.vagrant/
