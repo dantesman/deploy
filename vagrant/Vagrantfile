@@ -33,6 +33,8 @@ Vagrant.configure("2") do |config|
 	config.vm.define :dev do |dev|
 		dev.vm.hostname = "os-" + user
 		dev.vm.network :public_network, :bridge => nic
+		# just add this ip to your /etc/hosts file
+		dev.vm.network "private_network", mac: "020000021225", ip: "192.168.12.146"
 		dev.vm.provision :shell, :path => './scripts/debian/common/jre-oracle-8.sh'
 		dev.vm.provision "shell", inline: "sudo update-java-alternatives -s java-7-oracle"
 		dev.vm.provision :shell, :path => './scripts/debian/common/openthinclient-installer.sh'
@@ -41,6 +43,14 @@ Vagrant.configure("2") do |config|
 
 		dev.vm.synced_folder home, "/home/" + user, id: "home" + user 
 		dev.vm.synced_folder "../", "/vagrant"
+		dev.vm.provision "shell" do |s|
+    			ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+    			  s.inline = <<-SHELL
+      			  echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+		          mkdir -p /root/.ssh/
+          		  echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+    			SHELL
+		end
 	end
 	
 	config.vm.define :prod do |prod|
